@@ -11,7 +11,6 @@ C_FILES = kmain.c
 C_OBJECTS = $(C_FILES:.c=.o)      
 
 all: os.iso
-
 loader.o: $(LOADER)
 	$(ASM) -f elf32 $(LOADER) -o loader.o
 $(C_FILES:.c=.o): $(C_FILES)
@@ -25,7 +24,6 @@ os.iso: $(KERNEL)
 	cp menu.lst iso/boot/grub/
 	cp stage2_eltorito iso/boot/grub/
 	$(GENISOIMAGE) -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -A os -input-charset utf8 -quiet -boot-info-table -o os.iso iso
-
 run: os.iso
 	$(QEMU) -nographic -boot d -cdrom os.iso -m 32 -d cpu -D logQ.txt
 
