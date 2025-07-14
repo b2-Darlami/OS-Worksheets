@@ -24,7 +24,6 @@ segment .bss
 
 segment .text
     global asm_main
-
 asm_main:
     enter 0, 0
     pusha
@@ -33,7 +32,6 @@ asm_main:
     call print_string
 
     mov dword [i], 0
-
 .read_name:
     call read_char
     cmp al, 10
@@ -81,13 +79,11 @@ asm_main:
     mov eax, msg_too_high
     call print_string
     call print_nl
-
 .done_welcome:
 .after_welcome:
 
 ;Fill array 1–100
     mov dword [i], 0
-
 .fill_array:
     mov eax, [i]
     add eax, 1
@@ -97,11 +93,9 @@ asm_main:
     cmp dword [i], 100
     jl .fill_array
 
-
-; Sum entire array
+;Sum entire array
     mov dword [i], 0
     mov dword [sum], 0
-
 .sum_array:
     mov ebx, [i]
     mov eax, [array + ebx*4]
@@ -109,8 +103,7 @@ asm_main:
     inc dword [i]
     cmp dword [i], 100
     jl .sum_array
-
-    ; Output full sum
+    ;output full sum
     mov eax, msg_total
     call print_string
     mov eax, [sum]
@@ -118,7 +111,6 @@ asm_main:
     call print_nl
 
     ;range sum
-
     mov eax, msg_start
     call print_string
     call read_int
@@ -159,7 +151,6 @@ asm_main:
     add [sum], eax
     inc dword [i]
     jmp .range_loop
-
 .done_range:
     mov eax, msg_range
     call print_string
@@ -167,12 +158,10 @@ asm_main:
     call print_int
     call print_nl
     jmp .exit
-
 .invalid_range:
     mov eax, msg_invalid
     call print_string
     call print_nl
-
 .exit:
     popa
     mov eax, 0

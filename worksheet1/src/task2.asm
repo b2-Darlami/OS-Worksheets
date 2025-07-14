@@ -18,43 +18,36 @@ asm_main:
     enter 0,0
     pusha
 
-    ; Ask for the first number
+    ;asking for the first number
     mov eax, msg1
     call print_string
     call read_int
     mov [integer1], eax  ; save it
-
-    ; Ask for the second number
+    ;second number
     mov eax, msg1
     call print_string
     call read_int
     mov [integer2], eax  ; save it
-
-    ; Do the addition
-    mov eax, [integer1]
+    
+    mov eax, [integer1];adding the two numbers up here
     add eax, [integer2]
     mov [result], eax
 
-    ; Print: "The sum of <num1> and <num2> is: <result>"
+    ;printing the result
     mov eax, msg2
     call print_string
-
     mov eax, [integer1]
     call print_int
-
     mov eax, msg3
     call print_string
-
     mov eax, [integer2]
     call print_int
-
     mov eax, msg4
     call print_string
 
     mov eax, [result]
     call print_int
     call print_nl
-
     popa
     mov eax, 0
     leave
